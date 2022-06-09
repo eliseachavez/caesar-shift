@@ -1,4 +1,5 @@
-alphabet = {
+# GLOBAL VARIABLES ############
+down_alphabet = {
   a: 1,
   b: 2,
   c: 3,
@@ -25,13 +26,22 @@ alphabet = {
   x: 24,
   y: 25,
   z: 26
-
 }
+is_down? = true
+##################
 
 puts "Enter a message"
 message = gets.chomp
 puts "Enter the shift"
 shift = gets.chomp.to_i
+
+# Convert string to characters, characters to numbers
+# is is punctuation? leave it alone?
+# is it uppercase? note that
+# look up number equivalency
+# subtract shift (wrap from 0 to 26 instead of going negative)
+# convert back to a letter using lookup
+
 
 
 
