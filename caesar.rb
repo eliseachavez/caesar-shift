@@ -76,6 +76,7 @@ end
 def to_str(shifted_mesg)
   new_alphabet = @alphabet.invert
   new_mesg = new_alphabet[shifted_mesg]
+  new_mesg = new_mesg.to_s
 end
 # MAIN ###########
 puts "Enter a message"
