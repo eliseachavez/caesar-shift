@@ -42,7 +42,7 @@ end
 
 def encrypt(mesg_arr, shift)
   mesg_arr.map do |item|
-    if letters.include?(item)
+    if @letters.include?(item)
       if item.upcase == item
         item = item.downcase
         num_mesg = to_num(item)
@@ -54,15 +54,17 @@ def encrypt(mesg_arr, shift)
         shifted_mesg = shift_num(num_mesg, shift)
         encr_mesg = to_str(shifted_mesg)
       end
+    else
+      item
     end
   end
 end
 
 def to_num(item)
-  item = @alphabet[item]
+  item = @alphabet[item.to_sym]
 end
 
-def shift_num(num_mesg, shift) 1, 4 (b to y) = -3
+def shift_num(num_mesg, shift)
   num_mesg = num_mesg - shift
   if num_mesg < 0
     num_mesg = 25 + num_mesg
