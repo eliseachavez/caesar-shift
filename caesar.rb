@@ -1,35 +1,32 @@
-require 'pry-byebug'
-# GLOBAL VARIABLES ############
-
-alphabet = {
-  a: 1,
-  b: 2,
-  c: 3,
-  d: 4,
-  e: 5,
-  f: 6,
-  g: 7,
-  h: 8,
-  i: 9,
-  j: 10,
-  k: 11,
-  l: 12,
-  m: 13,
-  n: 14,
-  o: 15,
-  p: 16,
-  q: 17,
-  r: 18,
-  s: 19,
-  t: 20,
-  u: 21,
-  v: 22,
-  w: 23,
-  x: 24,
-  y: 25,
-  z: 26
+@alphabet = {
+  a: 0,
+  b: 1,
+  c: 2,
+  d: 3,
+  e: 4,
+  f: 5,
+  g: 6,
+  h: 7,
+  i: 8,
+  j: 9,
+  k: 10,
+  l: 11,
+  m: 12,
+  n: 13,
+  o: 14,
+  p: 15,
+  q: 16,
+  r: 17,
+  s: 18,
+  t: 19,
+  u: 20,
+  v: 21,
+  w: 22,
+  x: 23,
+  y: 24,
+  z: 25
 }
-is_down = true
+@letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 # METHODS #################
 
@@ -42,6 +39,42 @@ def get_shift
     "That was not a valid shift"
   end
 end
+
+def encrypt(mesg_arr, shift)
+  mesg_arr.map do |item|
+    if letters.include?(item)
+      if item.upcase == item
+        item = item.downcase
+        num_mesg = to_num(item)
+        shifted_mesg = shift_num(num_mesg, shift)
+        encr_mesg = to_str(shifted_mesg)
+        encr_mesg = encr_mesg.upcase
+      else #it's lowercase
+        num_mesg = to_num(item)
+        shifted_mesg = shift_num(num_mesg, shift)
+        encr_mesg = to_str(shifted_mesg)
+      end
+    end
+  end
+end
+
+def to_num(item)
+  item = @alphabet[item]
+end
+
+def shift_num(num_mesg, shift) 1, 4 (b to y) = -3
+  num_mesg = num_mesg - shift
+  if num_mesg < 0
+    num_mesg = 25 + num_mesg
+  else
+    num_mesg
+  end
+end
+
+def to_str(shifted_mesg)
+  new_alphabet = @alphabet.invert
+  new_mesg = new_alphabet[shifted_mesg]
+end
 # MAIN ###########
 puts "Enter a message"
 message = gets.chomp
@@ -49,14 +82,9 @@ shift = get_shift
 
 # Convert string to characters, characters to numbers
 mesg_arr = message.split('')
-binding.pry
+p encrypt(mesg_arr, shift)
 # is is punctuation? leave it alone?
 # is it uppercase? note that
 # look up number equivalency
 # subtract shift (wrap from 0 to 26 instead of going negative)
 # convert back to a letter using lookup
-
-
-
-
-
