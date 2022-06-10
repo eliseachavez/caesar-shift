@@ -84,7 +84,8 @@ shift = get_shift
 
 # Convert string to characters, characters to numbers
 mesg_arr = message.split('')
-p encrypt(mesg_arr, shift)
+encrypted_mesg = encrypt(mesg_arr, shift)
+encrypted_mesg = encrypted_mesg.join("")
 # is is punctuation? leave it alone?
 # is it uppercase? note that
 # look up number equivalency
