@@ -78,6 +78,7 @@ def to_str(shifted_mesg)
   new_mesg = new_alphabet[shifted_mesg]
   new_mesg = new_mesg.to_s
 end
+
 # MAIN ###########
 puts "Enter a message"
 message = gets.chomp
@@ -87,6 +88,7 @@ shift = get_shift
 mesg_arr = message.split('')
 encrypted_mesg = encrypt(mesg_arr, shift)
 encrypted_mesg = encrypted_mesg.join("")
+p encrypted_mesg
 # is is punctuation? leave it alone?
 # is it uppercase? note that
 # look up number equivalency
