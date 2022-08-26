@@ -32,13 +32,14 @@
 
 # METHODS #################
 class Cipher
+  attr_accessor :msg, :shift
   def initialize
-    get_message
-    @shift = get_shift
     begin_encryption_steps
   end
 
   def begin_encryption_steps
+    get_message
+    get_shift
     mesg_arr = convert_to_array(message)
     encrypted_mesg = encrypt(mesg_arr, shift)
     encrypted_mesg = encrypted_mesg.join('')
@@ -46,12 +47,7 @@ class Cipher
 
   def get_shift
     puts "Enter the shift"
-    shift = gets.chomp.to_i
-    if shift.is_a?(Integer)
-      shift
-    else
-      "That was not a valid shift"
-    end
+    @shift = gets.chomp.to_i
   end
 
   def get_message()
