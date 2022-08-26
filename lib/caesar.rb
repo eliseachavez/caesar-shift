@@ -40,9 +40,11 @@ class Cipher
   def begin_encryption_steps
     get_message
     get_shift
-    mesg_arr = convert_to_array(message)
-    encrypted_mesg = encrypt(mesg_arr, shift)
-    encrypted_mesg = encrypted_mesg.join('')
+    convert_to_array
+    parse
+    encrypt
+    @msg.join('')
+    print_msg
   end
 
   def get_shift
@@ -55,28 +57,20 @@ class Cipher
     @msg = gets.chomp
   end
 
-  def encrypt(mesg_arr, shift)
-    mesg_arr.map do |item|
-      if @letters.include?(item)
-        if item.upcase == item
-          item = item.downcase
-          num_mesg = to_num(item)
-          shifted_mesg = shift_num(num_mesg, shift)
-          encr_mesg = to_str(shifted_mesg)
-          encr_mesg = encr_mesg.upcase
-        else #it's lowercase
-          num_mesg = to_num(item)
-          shifted_mesg = shift_num(num_mesg, shift)
-          encr_mesg = to_str(shifted_mesg)
-        end
-      else
-        item
-      end
+  def parse
+    @msg.downcase
+  end
+
+  def encrypt
+    mesg_arr.map do |char|
+      num_mesg = to_num(item)
+      shifted_mesg = shift_num(num_mesg, shift)
+      encr_mesg = to_str(shifted_mesg)
     end
   end
 
-  def convert_to_array(message)
-    message.split('')
+  def convert_to_array
+    @msg.split('')
   end
 
   def to_num(item)
