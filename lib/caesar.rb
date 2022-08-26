@@ -93,7 +93,7 @@ shift = get_shift
 # Convert string to characters, characters to numbers
 message = convert_to_array(message)
 def convert_to_array(message)
-  mesg_arr = message.split('')
+  message.split('')
 end
 
 encrypted_mesg = encrypt(mesg_arr, shift)
