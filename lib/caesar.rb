@@ -91,7 +91,11 @@ message = get_message
 shift = get_shift
 
 # Convert string to characters, characters to numbers
-mesg_arr = message.split('')
+message = convert_to_array(message)
+def convert_to_array(message)
+  mesg_arr = message.split('')
+end
+
 encrypted_mesg = encrypt(mesg_arr, shift)
 encrypted_mesg = encrypted_mesg.join("")
 p encrypted_mesg
