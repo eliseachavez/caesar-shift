@@ -35,6 +35,13 @@ class Cipher
   def initialize
     @msg = get_message
     @shift = get_shift
+    begin_encryption_steps
+  end
+
+  def begin_encryption_steps
+    mesg_arr = convert_to_array(message)
+    encrypted_mesg = encrypt(mesg_arr, shift)
+    encrypted_mesg = encrypted_mesg.join('')
   end
 
   def get_shift
@@ -94,12 +101,12 @@ class Cipher
     new_mesg = new_alphabet[shifted_mesg]
     new_mesg = new_mesg.to_s
   end
+
+  def print_msg
+    p @msg
+  end
 end
 
 # MAIN ###########
 caesar_cipher = Cipher.new
-mesg_arr = convert_to_array(message)
-encrypted_mesg = encrypt(mesg_arr, shift)
-encrypted_mesg = encrypted_mesg.join('')
-p encrypted_mesg
 
