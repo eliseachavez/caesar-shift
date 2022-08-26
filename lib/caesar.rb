@@ -4,7 +4,7 @@
 class Cipher
   attr_accessor :msg, :shift
 
-  def initialize
+  def initialize(msg = nil, shift = nil)
     @alphabet = {
       a: 0,
       b: 1,
@@ -33,6 +33,8 @@ class Cipher
       y: 24,
       z: 25
     }
+    @msg = msg
+    @shift = shift
     @numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     @letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
     @encrpt_msg = nil
@@ -40,8 +42,10 @@ class Cipher
   end
 
   def begin_encryption_steps
-    get_message
-    get_shift
+    if @msg.nil? && @shift.nil?
+      get_message
+      get_shift
+    end
     parse
     encrypt
     numbers_back_to_letters
@@ -128,5 +132,5 @@ class Cipher
 end
 
 # MAIN ###########
-Cipher.new
+# Cipher.new
 
