@@ -33,7 +33,7 @@
 # METHODS #################
 class Cipher
   def initialize
-    @msg = get_message
+    get_message
     @shift = get_shift
     begin_encryption_steps
   end
@@ -56,7 +56,7 @@ class Cipher
 
   def get_message()
     puts "Enter a message"
-    message = gets.chomp
+    @msg = gets.chomp
   end
 
   def encrypt(mesg_arr, shift)
