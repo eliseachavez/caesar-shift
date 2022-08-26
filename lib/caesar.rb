@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 @alphabet = {
   a: 0,
   b: 1,
@@ -40,6 +42,11 @@ def get_shift
   end
 end
 
+def get_message()
+  puts "Enter a message"
+  message = gets.chomp
+end
+
 def encrypt(mesg_arr, shift)
   mesg_arr.map do |item|
     if @letters.include?(item)
@@ -80,8 +87,7 @@ def to_str(shifted_mesg)
 end
 
 # MAIN ###########
-puts "Enter a message"
-message = gets.chomp
+message = get_message
 shift = get_shift
 
 # Convert string to characters, characters to numbers
