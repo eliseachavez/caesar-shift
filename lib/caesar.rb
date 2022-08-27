@@ -36,6 +36,7 @@ class Cipher
     @msg = nil
     @encrpt_msg = nil
     @shift = nil
+    @temp_shift = nil
     @numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     @letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
@@ -57,7 +58,9 @@ class Cipher
 
   def get_shift
     puts 'Enter the shift'
-    @shift = gets.chomp.to_i
+    shift = gets.chomp.to_i
+    @temp_shift = shift
+    @shift = shift
   end
 
   def get_message
@@ -102,24 +105,32 @@ class Cipher
   end
 
   def pos_shift(char)
-    @shift %= 25 unless @shift.zero?
-    char += @shift
+    @temp_shift %= 25 unless @temp_shift.zero?
+    char += @temp_shift
     char
   end
 
   def neg_shift(char)
-    if @shift.abs > 25
-      @shift.abs
-      @shift %= 25
-      @shift = -@shift
-      if char < @shift.abs
-        char = @shift.abs - char
-        char = 25 - char
-      else
-        char += @shift
-      end
+    @temp_shift = shift.dup
+    if @temp_shift.abs > 25 #07 becomes 25-6
+      @temp_shift = @temp_shift.abs
+      @temp_shift %= 25 # 26 modulo 25 is 1
+      @temp_shift = -@temp_shift # shift if -1
+      char = wrap_shift(char) # if char is 7, this is now 6. so 78 becomes 67
     else
-      char -= @shift
+      char = wrap_shift(char)
+    end
+    char
+  end
+
+  def wrap_shift(char)
+    # char is 7, shift is -1
+    wrap_difference = nil
+    if char < @temp_shift.abs
+      wrap_difference = @temp_shift.abs - char
+      char = 26 - wrap_difference
+    else
+      char += @temp_shift
     end
     char
   end
@@ -144,5 +155,5 @@ class Cipher
 end
 
 # MAIN ###########
-# Cipher.new
+Cipher.new
 
