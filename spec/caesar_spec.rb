@@ -5,19 +5,23 @@ describe 'Cipher' do
   describe '#shift' do
     it 'returns an integer' do
       cipher = Cipher.new
-      puts cipher.shift
       expect(cipher.shift.is_a?(Integer)).to eql(true)
     end
   end
-#   describe '#get_message' do
-#     it 'returns a lowercase message' do
-#       msg = get_message
-#       expect(get_message).to eql(get_message.chomp)
-#     end
-#     it 'returns a lowercase message with non-alphabetic characters' do
-#       expect(get_message('NICE TO MEET YOU STRING, I\'M DAD')).to eql('nice to meet you string, i\'m dad')
-#     end
-#   end
+
+  describe '#message' do
+    it 'returns a lowercase message' do
+      cipher = Cipher.new
+      cipher.encrpt_msg = 'STRINGY MCSTRINGFACE'
+      expect(cipher.correct_case).to eql('stringy mcstringface')
+    end
+
+    it 'returns a lowercase message with non-alphabetic characters' do
+      cipher = Cipher.new
+      cipher.encrpt_msg = 'NICE TO MEET YOU STRING, I\'M DAD'
+      expect(cipher.correct_case).to eql('nice to meet you string, i\'m dad')
+    end
+  end
 
 #   describe '#convert_to_array' do
 #     it 'returns an array of characters' do

@@ -2,9 +2,9 @@
 
 # Class that takes a message and encrypts as a caesar cipher shift
 class Cipher
-  attr_accessor :msg, :shift
+  attr_accessor :msg, :encrpt_msg, :shift
 
-  def initialize(msg = nil, shift = nil)
+  def initialize
     @alphabet = {
       a: 0,
       b: 1,
@@ -33,19 +33,18 @@ class Cipher
       y: 24,
       z: 25
     }
-    @msg = msg
-    @shift = shift
+    @msg = nil
+    @encrpt_msg = nil
+    @shift = nil
     @numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     @letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    @encrpt_msg = nil
+
     begin_encryption_steps
   end
 
   def begin_encryption_steps
-    if @msg.nil? && @shift.nil?
-      get_message
-      get_shift
-    end
+    get_message
+    get_shift
     parse
     encrypt
     numbers_back_to_letters
