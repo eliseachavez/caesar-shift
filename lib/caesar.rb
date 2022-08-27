@@ -39,12 +39,16 @@ class Cipher
     @numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
     @letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
+    initialization_steps
     begin_encryption_steps
   end
 
-  def begin_encryption_steps
+  def initialization_steps
     get_message
     get_shift
+  end
+
+  def begin_encryption_steps
     parse
     encrypt
     numbers_back_to_letters
@@ -104,10 +108,19 @@ class Cipher
   end
 
   def neg_shift(char)
-    @shift.abs
-    @shift %= 25
-    @shift = -@shift
-    char += @shift
+    if @shift.abs > 25
+      @shift.abs
+      @shift %= 25
+      @shift = -@shift
+      if char < @shift.abs
+        char = @shift.abs - char
+        char = 25 - char
+      else
+        char += @shift
+      end
+    else
+      char -= @shift
+    end
     char
   end
 
