@@ -2,7 +2,7 @@
 
 # Class that takes a message and encrypts as a caesar cipher shift
 class Cipher
-  attr_accessor :msg, :encrpt_msg, :shift
+  attr_accessor :msg, :encrpt_msg, :shift, :temp_shift
 
   def initialize
     @alphabet = {
